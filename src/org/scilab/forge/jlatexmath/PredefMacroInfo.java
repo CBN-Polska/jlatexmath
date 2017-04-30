@@ -555,6 +555,10 @@ class PredefMacroInfo extends MacroInfo {
                 return PredefMacros.st_macro(tp, args);
             case 276:
                 return PredefMacros.fcscore_macro(tp, args);
+            case 300:
+            case 301:
+            case 302:
+                return PredefMacros.cancel_macro(tp, args, id - 300);                
             default:
                 return null;
             }

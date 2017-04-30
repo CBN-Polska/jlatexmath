@@ -310,5 +310,9 @@ final class PredefinedCommands {
         MacroInfo.Commands.put("abovewithdelims", new PredefMacroInfo(274, 2));
         MacroInfo.Commands.put("st", new PredefMacroInfo(275, 1));
         MacroInfo.Commands.put("fcscore", new PredefMacroInfo(276, 1));
+        
+        MacroInfo.Commands.put("cancel", new PredefMacroInfo(300, 1));  //value 1 means exactly one child is taken by "cancel"
+        MacroInfo.Commands.put("bcancel", new PredefMacroInfo(301, 1));
+        MacroInfo.Commands.put("xcancel", new PredefMacroInfo(302, 1));
     }
 }
