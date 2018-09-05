@@ -50,7 +50,6 @@ package org.scilab.forge.jlatexmath;
 
 import java.util.BitSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.ListIterator;
 
 import org.scilab.forge.jlatexmath.dynamic.DynamicAtom;
@@ -62,7 +61,7 @@ import org.scilab.forge.jlatexmath.dynamic.DynamicAtom;
 public class RowAtom extends Atom implements Row {
 
     // atoms to be displayed horizontally next to eachother
-    protected LinkedList<Atom> elements = new LinkedList<Atom>();
+    private final LinkedList<Atom> elements = new LinkedList<Atom>();
 
     public boolean lookAtLastAtom = false;
 
@@ -118,10 +117,9 @@ public class RowAtom extends Atom implements Row {
         return new SpaceAtom(TeXConstants.UNIT_POINT, 0.0f, 0.0f, 0.0f);
     }
 
-    public final void add(Atom el) {
-        if (el != null) {
+    public void add(Atom el) {
+        if (el != null)
             elements.add(el);
-        }
     }
 
     /**

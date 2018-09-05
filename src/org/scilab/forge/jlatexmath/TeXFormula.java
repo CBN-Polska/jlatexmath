@@ -445,7 +445,10 @@ public class TeXFormula {
             if (el instanceof MiddleAtom)
                 middle.add((MiddleAtom) el);
             if (root == null) {
-                root = el;
+                if (el instanceof ReadOnlyAtom)
+                    root = new RowAtom(el);  // bugfix: ENT-72, EN-808
+                else
+                    root = el;  
             } else {
                 if (!(root instanceof RowAtom)) {
                     root = new RowAtom(root);
@@ -1041,6 +1044,7 @@ public class TeXFormula {
                 throw new FormulaNotFoundException(name);
             }
             TeXFormula tf = new TeXFormula(f);
+            tf.root = new ReadOnlyAtom(tf.root);  // AJC: some protection from being changed
             predefinedTeXFormulas.put(name, tf);
             return tf;
         } else {

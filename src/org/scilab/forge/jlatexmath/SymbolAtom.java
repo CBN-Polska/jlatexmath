@@ -203,4 +203,13 @@ public class SymbolAtom extends CharSymbol {
         // style doesn't matter here
         return tf.getChar(name, TeXConstants.STYLE_DISPLAY).getCharFont();
     }
+
+    /**
+     * For debug.
+     * @return tex commang name - but don't use it in sourcecode - it's for debug only.
+     */
+    @Override
+    public String toString() {
+        return "SymbolAtom{" + name + '}';
+    }
 }
