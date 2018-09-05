@@ -16,10 +16,10 @@ public class ReadOnlyAtom extends RowAtom {
         super(el);
     }
     
-    @Override
-    public void setPreviousAtom(Dummy prev) {
-        throw new UnsupportedOperationException("Global atoms protection. This is a read only atom.");
-    }
+//    @Override
+//    public void setPreviousAtom(Dummy prev) {
+//        throw new UnsupportedOperationException("Global atoms protection. This is a read only atom.");
+//    }
 
     @Override
     public void add(Atom el) {
