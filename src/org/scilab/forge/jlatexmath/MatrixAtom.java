@@ -395,7 +395,8 @@ public class MatrixAtom extends Atom {
                 } catch (Exception e) {
                     //The previous atom was an intertext atom
                     //position[j - 1] = -1;
-                    boxarr[i][j - 1].type = TeXConstants.TYPE_INTERTEXT;
+                    if (boxarr[i][j - 1] != nullBox) // BUGFIX: EN-122
+                        boxarr[i][j - 1].type = TeXConstants.TYPE_INTERTEXT;
                     j = col - 1;
                 }
 

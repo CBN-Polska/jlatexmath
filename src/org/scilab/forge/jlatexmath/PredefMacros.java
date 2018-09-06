@@ -1839,4 +1839,11 @@ public class PredefMacros {
 
         return new TeXFormula(tp, str).root;
     }
+
+    public static final Atom cancel_macro(final TeXParser tp, final String[] args, int styl) throws ParseException {
+        TeXFormula text = new TeXFormula(tp, args[1], false);
+        if (text.root == null)
+            throw new ParseException("Body cannot be empty! Did you forget {} after \\cancel?");
+        return new CancelAtom(text, styl);
+    }
 }
