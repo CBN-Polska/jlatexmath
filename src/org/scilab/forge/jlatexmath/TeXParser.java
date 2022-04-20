@@ -721,6 +721,7 @@ public class TeXParser {
                 case L_GROUP :
                     Atom atom = getArgument();
                     if (atom != null) {
+                        atom = atom.clone();
                         atom.type = TeXConstants.TYPE_ORDINARY;
                     }
                     formula.add(atom);
