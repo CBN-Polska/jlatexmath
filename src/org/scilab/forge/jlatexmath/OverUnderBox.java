@@ -43,14 +43,14 @@
  * version.
  *
  */
-
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 /**
- * A box representing another box with a delimiter box and a script box above or under it,
+ * A box representing another box with a delimiter box and a script box above or
+ * under it,
  * with script and delimiter seperated by a kern.
  */
 public class OverUnderBox extends Box {
@@ -70,14 +70,15 @@ public class OverUnderBox extends Box {
      * the parameter boxes must have an equal width!!
      *
      * @param b
-     *           base box to be drawn on the baseline
+     *               base box to be drawn on the baseline
      * @param d
-     *           delimiter box
+     *               delimiter box
      * @param script
-     *           subscript or superscript box
+     *               subscript or superscript box
      * @param over
-     *           true : draws delimiter and script box above the base box, false : under the
-     *           base box
+     *               true : draws delimiter and script box above the base box, false : under
+     *               the
+     *               base box
      */
     public OverUnderBox(Box b, Box d, Box script, float kern, boolean over) {
         base = b;
@@ -96,15 +97,16 @@ public class OverUnderBox extends Box {
                 + (!over && script != null ? script.height + script.depth + kern : 0);
     }
 
-    public void draw(Graphics2D g2, float x, float y) {
+    public void draw(Graphics2D g2, float x, float y) {   
         drawDebug(g2, x, y);
         base.draw(g2, x, y);
 
         float yVar = y - base.height - del.getWidth();
         del.setDepth(del.getHeight() + del.getDepth());
         del.setHeight(0);
+        double transX =x + base.getWidth() / 2.0+del.depth/2;
         if (over) { // draw delimiter and script above base box
-            double transX = x + (del.height + del.depth) * 0.75, transY = yVar;
+            double transY = yVar;
             AffineTransform oldAt = g2.getTransform();
             g2.translate(transX, transY);
             g2.rotate(Math.PI / 2);
@@ -112,25 +114,22 @@ public class OverUnderBox extends Box {
             g2.setTransform(oldAt);
 
             // draw superscript
-            if (script != null) {
+            if (script != null)
                 script.draw(g2, x, yVar - kern - script.depth);
-            }
         }
 
         yVar = y + base.depth;
         if (!over) { // draw delimiter and script under base box
-            double transX = x + (del.getHeight() + del.depth) * 0.75, transY = yVar;
+            double transY = yVar;
             AffineTransform oldAt = g2.getTransform();
             g2.translate(transX, transY);
             g2.rotate(Math.PI / 2);
             del.draw(g2, 0, 0);
             g2.setTransform(oldAt);
             yVar += del.getWidth();
-
             // draw subscript
-            if (script != null) {
+            if (script != null)
                 script.draw(g2, x, yVar + kern + script.height);
-            }
         }
     }
 
