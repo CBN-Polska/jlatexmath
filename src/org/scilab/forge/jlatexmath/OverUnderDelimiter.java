@@ -93,7 +93,7 @@ public class OverUnderDelimiter extends Atom {
         }
 
         // create centered horizontal box if smaller than maximum width
-        float max = getMaxWidth(b, del, scriptBox);
+        float max = getMaxWidth(b, del, scriptBox)+0.001f;//taki hack - zwiekszam odrobine rozmiar zeby wymusic przekalkulowanie nizej
         if (max - b.getWidth() > TeXFormula.PREC) {
             b = new HorizontalBox(b, max, TeXConstants.ALIGN_CENTER);
         }

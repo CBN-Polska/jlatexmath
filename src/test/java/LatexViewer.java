@@ -20,7 +20,9 @@ public class LatexViewer extends JFrame {
         setLocationRelativeTo(null);
 
         // Hardkodowana formuła
-        String latex = "5++2+3+\\underbrace{2}_{xxxxxxxxxxxxxxxxxxxxxxx}";
+        String latex = """
+                       $\\underbrace{3 \\cdot 3 \\cdot 3}_{\\raisebox{-5em}{\\text{aaaaaaaaaaaaaaaaaaaaaaa}}$
+                       """;
 
         // Tworzenie formuły
         TeXFormula formula = new TeXFormula(latex);
