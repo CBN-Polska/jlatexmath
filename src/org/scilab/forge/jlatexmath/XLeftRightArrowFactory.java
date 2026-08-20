@@ -42,7 +42,6 @@
  * version.
  *
  */
-
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Color;
@@ -64,33 +63,42 @@ public class XLeftRightArrowFactory {
         float h = arr.getHeight();
         float d = arr.getDepth();
 
-        float swidth = arr.getWidth();
-        if (width <= swidth) {
+        float arrowWidth = arr.getWidth();
+        if (width <= arrowWidth) {
             arr.setDepth(d / 2);
             return arr;
         }
 
         Box minus = new SmashedAtom(MINUS, "").createBox(env);
         Box kern = new SpaceAtom(TeXConstants.UNIT_MU, -4f, 0, 0).createBox(env);
-        float mwidth = minus.getWidth() + kern.getWidth();
-        swidth += kern.getWidth();
+        arrowWidth += kern.getWidth();
+        float minusWidth = minus.getWidth();
+        float kernWidth = kern.getWidth();
         HorizontalBox hb = new HorizontalBox();
         float w;
-        for (w = 0; w < width - swidth - mwidth; w += mwidth) {
+        for (w = 0; w < width - arrowWidth - minusWidth - kernWidth; w += minusWidth) {
+            if (w != 0) {
+                hb.add(kern);
+                w += kernWidth;
+            }
             hb.add(minus);
-            hb.add(kern);
         }
 
-        float sf = (width - swidth - w) / minus.getWidth();
-
-        hb.add(new SpaceAtom(TeXConstants.UNIT_MU, -2f * sf, 0, 0).createBox(env));
-        hb.add(new ScaleAtom(MINUS, sf, 1).createBox(env));
-
         if (left) {
-            hb.add(0, new SpaceAtom(TeXConstants.UNIT_MU, -3.5f, 0, 0).createBox(env));
+            hb.add(0, kern);
+            hb.add(0, minus);
+            float oIleZaDluga = hb.width + arrowWidth - width;
+            float oIleZaDlugaUnit = oIleZaDluga / SpaceAtom.getFactor(TeXConstants.UNIT_MU, env);
+            hb.add(0, new SpaceAtom(TeXConstants.UNIT_MU, -oIleZaDlugaUnit, 0, 0).createBox(env));
+            hb.add(0, kern);
             hb.add(0, arr);
         } else {
-            hb.add(new SpaceAtom(TeXConstants.UNIT_MU, -2f * sf - 2f, 0, 0).createBox(env));
+            hb.add(kern);
+            hb.add(minus);
+            float oIleZaDluga = hb.width + arrowWidth - width;
+            float oIleZaDlugaUnit = oIleZaDluga / SpaceAtom.getFactor(TeXConstants.UNIT_MU, env);
+            hb.add(new SpaceAtom(TeXConstants.UNIT_MU, -oIleZaDlugaUnit, 0, 0).createBox(env));
+            hb.add(kern);
             hb.add(arr);
         }
 
